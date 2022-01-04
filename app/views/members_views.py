@@ -19,7 +19,7 @@ def set_lang(lang):
     gettext.install('lang', i18n_dir)
     trans_file = i18n_dir + lang + '/LC_MESSAGES/flask_security'
     tr = gettext.translation(trans_file, 'locale',  languages=[lang])
-    tr.install(True)
+    tr.install()
     app.jinja_env.install_gettext_translations(tr)
 
 
@@ -38,7 +38,7 @@ def init_my_blueprint():
 def before_request():
     lang = get_locale()
     lang = lang if lang else app.config['BABEL_DEFAULT_LOCALE']
-    set_lang(lang)
+    #set_lang(lang)
 
     if request.path.startswith('/admin'):
         if current_user.is_authenticated:
